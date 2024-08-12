@@ -10,7 +10,6 @@
     "express": "^4.17.1",
     "sqlite3": "^5.0.0",
     "serverless-http": "^2.7.0",
-    "csv-parser": "^3.0.0",
-    "pm2": "^5.1.0"
+    "csv-parser": "^3.0.0"
   }
 }
