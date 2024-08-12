@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node functions/server.js",
     "build": "echo 'No build step required'",
-    "postinstall": "mkdir -p /app/tmp && cp -r databases/* /app/tmp/"
+    "postinstall": "mkdir -p /tmp/databases && cp -r databases/* /tmp/databases/"
   },
   "dependencies": {
     "express": "^4.17.1",
