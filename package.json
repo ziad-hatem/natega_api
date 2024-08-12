@@ -1,5 +1,5 @@
 {
-  "name": "your-app-name",
+  "name": "fastsearch",
   "version": "1.0.0",
   "main": "functions/server.js",
   "scripts": {

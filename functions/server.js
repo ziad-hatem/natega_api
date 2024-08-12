@@ -8,7 +8,7 @@ const router = express.Router();
 const dbCount = 8;
 const dbPaths = Array.from(
   { length: dbCount },
-  (_, i) => `./natega_part${i + 1}.db`
+  (_, i) => `/app/tmp/natega_part${i + 1}.db`
 );
 const dbs = dbPaths.map(
   (path) =>
@@ -41,6 +41,7 @@ router.get("/search", (req, res) => {
     db.get(query, [targetNumber], (err, row) => {
       completed++;
       if (err) {
+        console.error(`Error querying database: ${err.message}`);
         if (!found && completed === dbCount) {
           return res.status(500).json({ error: err.message });
         }
