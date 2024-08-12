@@ -1,21 +1,16 @@
 {
-  "name": "fastsearch",
+  "name": "your-app-name",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "functions/server.js",
   "scripts": {
-    "start": "node server.js",
-    "postinstall": "mkdir -p /app/tmp && cp -r databases/* /app/tmp/"
+    "start": "node functions/server.js",
+    "build": "echo 'No build step required'"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.0",
+    "serverless-http": "^2.7.0",
     "csv-parser": "^3.0.0",
-    "express": "^4.19.2",
-    "sqlite3": "^5.1.7",
     "pm2": "^5.1.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.4"
   }
 }

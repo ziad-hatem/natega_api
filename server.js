@@ -1,13 +1,14 @@
 const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
+const serverless = require("serverless-http");
 
 const app = express();
-const port = 3000;
+const router = express.Router();
 
 const dbCount = 8;
 const dbPaths = Array.from(
   { length: dbCount },
-  (_, i) => `/app/tmp/natega_part${i + 1}.db`
+  (_, i) => `./natega_part${i + 1}.db`
 );
 const dbs = dbPaths.map(
   (path) =>
@@ -20,7 +21,7 @@ const dbs = dbPaths.map(
     })
 );
 
-app.get("/search", (req, res) => {
+router.get("/search", (req, res) => {
   const targetNumber = Number(req.query.target); // Get target number from query params
   const columnName = req.query.column; // Get column name from query params
 
@@ -54,20 +55,7 @@ app.get("/search", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+app.use("/.netlify/functions/server", router);
 
-// Close the database connections when the process is terminated
-process.on("SIGINT", () => {
-  dbs.forEach((db) => {
-    db.close((err) => {
-      if (err) {
-        console.error("Error closing database:", err.message);
-      } else {
-        console.log("Database connection closed.");
-      }
-    });
-  });
-  process.exit(0);
-});
+module.exports = app;
+module.exports.handler = serverless(app);
